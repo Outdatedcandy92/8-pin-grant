@@ -63,9 +63,9 @@
 
             details {
                 margin-bottom: 0.35rem;
-                border: 1px solid rgba(128, 128, 128, 0.3);
+                border: 1px solid rgba(128, 128, 128, 0.5);
                 border-radius: 6px;
-                background-color: rgba(128, 128, 128, 0.03);
+                background-color: rgba(128, 128, 128, 0.06);
                 transition: background-color 0.2s ease;
             }
 
@@ -74,8 +74,8 @@
             }
 
             details[open] {
-                background-color: rgba(128, 128, 128, 0.05);
-                border-color: rgba(128, 128, 128, 0.5);
+                background-color: rgba(128, 128, 128, 0.09);
+                border-color: rgba(128, 128, 128, 0.7);
             }
 
             summary {
@@ -96,12 +96,13 @@
 
             /* Styled the elements to match the page vibe */
             .idea-btn {
-                background: rgba(128, 128, 128, 0.1);
-                border: 1px solid rgba(128, 128, 128, 0.4);
+                background: rgba(128, 128, 128, 0.12);
+                border: 1px solid rgba(128, 128, 128, 0.6);
                 padding: 0.4rem 0.8rem;
                 border-radius: 4px;
                 cursor: pointer;
                 color: currentColor;
+                font-weight: bold;
                 transition: background 0.2s;
             }
 
@@ -111,7 +112,7 @@
 
             .idea-btn:disabled {
                 cursor: wait;
-                opacity: 0.7;
+                opacity: 0.85;
             }
 
             #idea-display p, span {
@@ -124,6 +125,7 @@
         <div id="root">
             <br /><br /> <h1>8-Pin Grant</h1>
             <h4 style="font-weight: bold;">Sponsored by Rudy</h4><br>
+            <p id="countdown" class="bold" style="font-size: 1.1rem;"></p>
             <div>
                 <p>
                     Build a PCB with an 8-pin microcontroller. We'll pay up to
@@ -148,7 +150,9 @@
                         <li>
                             <b class="bold">Design it: </b>
                             Create a custom PCB using a modern 8-pin MCU. You
-                            must use KiCad for your design.
+                            must use KiCad for your design. Track your time in
+                            your GitHub repository by journaling, detailing all
+                            the changes you make.
                         </li>
                         <li>
                             <b class="bold">Submit it: </b>
@@ -356,8 +360,8 @@
                         </summary>
                         <p>
                             Yes. To get the full $35, you must spend at least 7 hours
-                            working on your project. If you need more hour, spend
-                            time making your project nice! Add art, cool features,
+                            working on your project. If you need more hours, spend
+                            time making your project better! Add art, cool features,
                             or tidy up your layout/routing. Optionally, CAD a case
                             for your PCB!
                         </p>
@@ -384,19 +388,19 @@
                     </p>
                 </div>
     <pre style="font-family: monospace, monospace;">
-  ┌───────────┐
-┌─│           ├─┐
-└─│           ├─┘
-┌─│           ├─┐
-└─│           ├─┘
-┌─│           ├─┐
-└─│           ├─┘
-┌─│           ├─┐
-└─│           ├─┘
-  └───────────┘
+  ┌───────────┐                                                                          
+┌─│           ├─┐                                                                        
+└─│    █████╗ └─┘   ██████╗ ██╗███╗   ██╗     ██████╗ ██████╗  █████╗ ███╗   ██╗████████╗
+┌─│   ██╔══██╗      ██╔══██╗██║████╗  ██║    ██╔════╝ ██╔══██╗██╔══██╗████╗  ██║╚══██╔══╝
+└─│   ╚█████╔╝█████╗██████╔╝██║██╔██╗ ██║    ██║  ███╗██████╔╝███████║██╔██╗ ██║   ██║   
+┌─│   ██╔══██╗╚════╝██╔═══╝ ██║██║╚██╗██║    ██║   ██║██╔══██╗██╔══██║██║╚██╗██║   ██║   
+└─│   ╚█████╔╝      ██║     ██║██║ ╚████║    ╚██████╔╝██║  ██║██║  ██║██║ ╚████║   ██║   
+┌─│    ╚════╝ ┌─┐   ╚═╝     ╚═╝╚═╝  ╚═══╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   
+└─│           ├─┘                                                                        
+  └───────────┘                                                                          
   </pre>
             </div>
-            <footer style="padding-top: 1rem; font-size: 0.85rem; opacity: 0.8;">
+            <footer style="padding-top: 1rem; font-size: 0.85rem;">
                 <a href="https://hackclub.com/">Hack Club</a> &middot;
                 <a href="https://hackclub.com/privacy-and-terms">Privacy &amp; Terms</a> &middot;
                 <a href="https://forms.hackclub.com/bounty">Report a Bounty</a> &middot;
@@ -413,6 +417,29 @@
             src="https://shynet.radi8.dev/ingress/e38c6596-15cd-4901-9ce2-675d869bb036/script.js"
         ></script>
         <script>
+          const deadline = new Date("2026-11-20T17:00:00-06:00");
+          const countdownEl = document.getElementById('countdown');
+
+          function updateCountdown() {
+              const now = new Date();
+              const diff = deadline - now;
+
+              if (diff <= 0) {
+                  countdownEl.textContent = "Applications are closed.";
+                  return;
+              }
+
+              const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+              const minutes = Math.floor((diff / (1000 * 60)) % 60);
+              const seconds = Math.floor((diff / 1000) % 60);
+
+              countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s until applications close (Nov 20)`;
+          }
+
+          updateCountdown();
+          setInterval(updateCountdown, 1000);
+
           const ideas = {
             "USB Macro Pad": "A keypad to send custom shortcuts via bit-banged USB",
             "Binary Desk Clock": "Display the current hour or minute in binary",
@@ -459,7 +486,7 @@
 
                       display.innerHTML = `
                           <p><strong class="bold">${randomKey}</strong><br>
-                          <span style="font-size: 0.85rem; opacity: 0.8; margin-left: -2.2rem;">${randomDesc}</span></p>
+                          <span style="font-size: 0.85rem; margin-left: -2.2rem;">${randomDesc}</span></p>
                       `;
 
                       button.disabled = false;
