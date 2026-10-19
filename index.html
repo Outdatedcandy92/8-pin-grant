@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <title>8-Pin Grant</title>
+        <style>
+            :root {
+                --font-family: monospace;
+                padding-bottom: 1rem;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: var(--font-family);
+                font-weight: 400;
+            }
+
+            html,
+            body {
+                background-color: Canvas;
+                color: CanvasText;
+                color-scheme: light dark;
+                font-size: 0.9rem;
+            }
+
+            body {
+                padding: 0 20px;
+            }
+
+            #root {
+                margin: 0 auto;
+                max-width: 50rem;
+            }
+
+            p {
+                padding-bottom: 1rem;
+            }
+
+            h1 {
+                height: auto;
+                padding-bottom: 1rem;
+            }
+
+            li {
+                margin-left: 1rem;
+                line-height: 1.3rem;
+            }
+
+            ul,
+            ol {
+                margin-left: 1rem;
+            }
+
+            .bold {
+                font-weight: bold !important;
+            }
+
+            details {
+                margin-bottom: 0.35rem;
+                border: 1px solid rgba(128, 128, 128, 0.3);
+                border-radius: 6px;
+                background-color: rgba(128, 128, 128, 0.03);
+                transition: background-color 0.2s ease;
+            }
+
+            details:hover {
+                background-color: rgba(128, 128, 128, 0.08);
+            }
+
+            details[open] {
+                background-color: rgba(128, 128, 128, 0.05);
+                border-color: rgba(128, 128, 128, 0.5);
+            }
+
+            summary {
+                cursor: pointer;
+                padding: 0.75rem 1rem;
+                outline: none;
+                user-select: none;
+            }
+
+            details > p,
+            details > img {
+                padding: 0.5rem 1rem 1rem 2.2rem;
+            }
+
+            details > p:last-of-type {
+                padding-bottom: 1rem;
+            }
+
+            /* Styled the elements to match the page vibe */
+            .idea-btn {
+                background: rgba(128, 128, 128, 0.1);
+                border: 1px solid rgba(128, 128, 128, 0.4);
+                padding: 0.4rem 0.8rem;
+                border-radius: 4px;
+                cursor: pointer;
+                color: currentColor;
+                transition: background 0.2s;
+            }
+
+            .idea-btn:hover {
+                background: rgba(128, 128, 128, 0.2);
+            }
+
+            .idea-btn:disabled {
+                cursor: wait;
+                opacity: 0.7;
+            }
+
+            #idea-display p, span {
+                padding-left: 2.2rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="root">
+            <br /><br /> <h1>8-Pin Grant</h1>
+            <h4 style="font-weight: bold;">Sponsored by Rudy</h4><br>
+            <div>
+                <p>
+                    Build a PCB with an 8-pin microcontroller. We'll pay up to
+                    $35 for parts and boards.
+                </p>
+                <p>
+                    I fell in love with the ATtiny412 microcontroller on a
+                    project I worked on. It has 4kB on flash storage and
+                    256B of memory. You've all been spoiled by your fancy
+                    ESP32's with 16MB of storage. While the ATtiny412 is
+                    wonderful, there are some other great chips out there. I
+                    encourage you to find one you like!<br /><br />
+                    <span style="margin-left: -2.2rem;">Good engineering is made through constraints, not infinite
+                    resources.</span>
+                </p>
+            </div>
+            <div>
+                <div>
+                    <h2 class="bold">How it works</h2>
+                    <br>
+                    <ol class="list-section">
+                        <li>
+                            <b class="bold">Design it: </b>
+                            Create a custom PCB using a modern 8-pin MCU. You
+                            must use KiCad for your design.
+                        </li>
+                        <li>
+                            <b class="bold">Submit it: </b>
+                            Send us your KiCad files and BOM. We'll review your
+                            design to make sure it follows our guidelines.
+                        </li>
+                        <li>
+                            <b class="bold">Get $35 + tools: </b>
+                            If approved, we'll cover up to $35 of costs for
+                            parts (DigiKey) and PCBs (OSH Park).
+                            <b>Plus:</b> we'll send you the tools you need to
+                            program your chips.
+                        </li>
+                        <li>
+                            <b class="bold">Ship it: </b>
+                            Build it, make some code, and share a video of it
+                            working. We might send a sticker!
+                        </li>
+                    </ol>
+                </div>
+                <br />
+
+                <div>
+                    <h2 class="bold">FAQ</h2>
+                    <br>
+                    <details>
+                        <summary class="bold">
+                            Who is this for?
+                        </summary>
+                        <p>
+                            Teenagers. If you are 18 or younger, you are
+                            eligible. If you are an adult, you are welcome to
+                            build along, but we cannot cover your costs.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            What chips can I use?
+                        </summary>
+                        <p>
+                            Any 8-pin microcontroller is allowed. A great place
+                            to look would be on
+                            <a
+                                href="https://www.digikey.com/en/products/filter/embedded/microcontrollers/685?s=N4IgjCBcpgTAnBaIDGUBmBDANgZwKYA0IA9lANogICsALAOwBsIxNADPPS1fNR293YAOLq15tqQwfADM8RNLnxai%2BczG02YUT02xq02o1gCN9agY2IpV2Ot294hzswC6xAA4AXKCADKXgBOAJYAdgDmIAC%2BxGDwQk7IaJBYeESkFCACrjEgALSJoMlBAK7pZJCUEDnEebBQRVCl5ZmWIE45UVFAA"
+                                >DigiKey</a
+                            > or
+                            <a
+                                href="https://www.mouser.com/c/semiconductors/integrated-circuits-ics/embedded-processors-controllers/microcontrollers-mcu/?package%20%2F%20case=DFN-8%7C~DIP-8%7C~DSBGA-8%7C~MSOP-8%7C~PDIP-8%7C~QFN-8%7C~SO-N-8%7C~SO8N%7C~SO8N-8%7C~SOIC-8%7C~SOIC-Narrow-8%7C~SON-8%7C~SOP-8%7C~SOT-23-8%7C~SOT-23-THIN-8%7C~SOT-8%7C~TSSOP-8%7C~UDFN-8%7C~USON-8%7C~WDFN-8%7C~WSON-8&instock=y&active=y&rohscompliant=y&normallystocked=y"
+                                >Mouser</a
+                            >
+                            - it's the list for allowed MCU's. Parts from Mouser
+                            are typically priced lower than on DigiKey.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            What software must I use?
+                        </summary>
+                        <p>
+                            You must use KiCad. We love open source tools.
+                            Designs in EasyEDA, Eagle, or Altium will not be
+                            accepted for this grant.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            I have no idea how to use KiCad!
+                        </summary>
+                        <p>
+                            That's okay! This is the perfect excuse to learn.
+                            YouTube is your best friend here. Search for "KiCad
+                            9 tutorial for beginners". It will be frustrating at
+                            first, but seeing your own board in real life is
+                            worth it.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            Can I use other parts?
+                        </summary>
+                        <p>
+                            Yes! You can use LEDs, sensors, resistors,
+                            batteries, buttons, etc. The brain must be an 8-pin
+                            MCU - no hiding an ESP32 underneath! If you have a
+                            question about a specific part, please ask us.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            How do I get my parts?
+                        </summary>
+                        <p>
+                            We order the parts for you from DigiKey or Mouser
+                            and the PCBs from OSH Park. We don't send cash;
+                            but instead hardware! There's a chance you may receive
+                            different parts than requested (e.g. for passives) if we
+                            find multiple projects using similar parts.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            How do I program the chip?
+                        </summary>
+                        <p>
+                            A lot of different methods to
+                            program chips exist nowadays. The modern AVR MCU's
+                            can be programmed via UPDI, however, you have free
+                            rein over what microcontroller you pick. We'll do
+                            our best to get you the correct tools for the job.
+                            If using a surface mounted chip, make sure to leave
+                            space for a SOIC-8/equivalent clip, and if using
+                            through hole parts, add headers for programming.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            How do I know how much my project will cost?
+                        </summary>
+                        <p>
+                            To check the price of your PCBs, you can upload your
+                            KiCad PCB file directly to
+                            <a href="https://oshpark.com">OSH Park</a>. We will
+                            order your boards in OSH Park's
+                            <a href="https://docs.oshpark.com/services/two-layer/">Prototype</a> or
+                            <a href="https://docs.oshpark.com/services/afterdark/">After Dark</a> services.
+                            Creating a BOM for DigiKey/Mouser is a bit trickier.
+                            In KiCad, set a property on each part with its DigiKey/Mouser
+                            part number in a field called
+                            <span class="bold">Digikey Part</span> or
+                            <span class="bold">Mouser Part</span> (see below.)
+                            This number will not be the manufacturer part
+                            number, this is DigiKey/Mouser's internal part number.
+                            From there, export the BOM, and upload it to DigiKey.
+                            We'll get you up to 3 assemblies worth of parts if
+                            it's under the $35 limit.
+                        </p>
+                        <img
+                            src="https://i.ibb.co/TMz5Z7KR/image.png"
+                            alt="image"
+                            border="0"
+                        />
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            How long does the approval/review process take?
+                        </summary>
+                        <p>
+                            We aim to review submissions within 3-5 days.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            Once approved, how long will it take to receive my
+                            parts and PCBs?
+                        </summary>
+                        <p>
+                            It might take a few weeks + shipping time. OSH Park
+                            operates in batches, and while we plan to order all
+                            PCBs at the same time, we can't make any promises.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            Is the $35 grant limit flexible?
+                        </summary>
+                        <p>
+                            No. Please try to stay under $35. If your project goes
+                            over, you will need to pay the remaining balance.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            Can I order from other suppliers besides DigiKey, Mouser, and
+                            OSH Park?
+                        </summary>
+                        <p>No.</p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            Are there any limitations on PCB size or layers?
+                        </summary>
+                        <p>
+                            To keep costs low and meet the $35 budget, your
+                            design must be a 2-layer PCB. We highly recommend
+                            keeping the board size reasonably small, ideally
+                            under 4 square inches.
+                        </p>
+                        <p>OSH Park pricing is based on
+                            area ($5/sq in), so a smaller board will allow you to get more
+                            assemblies under budget. OSH Park provides
+                            directions on setting design rules
+                            <a
+                                href="https://docs.oshpark.com/design-tools/kicad/"
+                                >here</a
+                            >. If you'd like, we can get you your PCB in OSH
+                            Park's
+                            <a href="https://docs.oshpark.com/services/afterdark/">
+                                After Dark</a> service, which is manufactured to
+                            have clear solder mask and a black FR4 substrate.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            Is there a time requirement?
+                        </summary>
+                        <p>
+                            Yes. To get the full $35, you must spend at least 7 hours
+                            working on your project. If you need more hour, spend
+                            time making your project nice! Add art, cool features,
+                            or tidy up your layout/routing. Optionally, CAD a case
+                            for your PCB!
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            I can't think of any ideas :(
+                        </summary>
+                        <p>
+                            <button id="generate-btn" class="idea-btn">Generate a Random Idea</button>
+                        <div id="idea-display"></div>
+                        </p>
+                    </details>
+                </div>
+
+                <div style="padding-top: 20px">
+                    <p>
+                        Contact me in the
+                        <a
+                            href="https://hackclub.enterprise.slack.com/archives/C0A0ER31ZFD"
+                            >#8-pin-grant</a
+                        >
+                        channel in the Slack for inquiries.
+                    </p>
+                </div>
+    <pre style="font-family: monospace, monospace;">
+  ┌───────────┐
+┌─│           ├─┐
+└─│           ├─┘
+┌─│           ├─┐
+└─│           ├─┘
+┌─│           ├─┐
+└─│           ├─┘
+┌─│           ├─┐
+└─│           ├─┘
+  └───────────┘
+  </pre>
+            </div>
+            <footer style="padding-top: 1rem; font-size: 0.85rem; opacity: 0.8;">
+                <a href="https://hackclub.com/">Hack Club</a> &middot;
+                <a href="https://hackclub.com/privacy-and-terms">Privacy &amp; Terms</a> &middot;
+                <a href="https://forms.hackclub.com/bounty">Report a Bounty</a> &middot;
+                <a href="https://security.hackclub.com/">Security</a>
+            </footer>
+        </div>
+        <noscript>
+            <img
+                src="https://shynet.radi8.dev/ingress/e38c6596-15cd-4901-9ce2-675d869bb036/pixel.gif"
+            />
+        </noscript>
+        <script
+            defer
+            src="https://shynet.radi8.dev/ingress/e38c6596-15cd-4901-9ce2-675d869bb036/script.js"
+        ></script>
+        <script>
+          const ideas = {
+            "USB Macro Pad": "A keypad to send custom shortcuts via bit-banged USB",
+            "Binary Desk Clock": "Display the current hour or minute in binary",
+            "RGB Mood Lamp": "A WS2812B LED cycling smoothly through colors",
+            "Electronic Dice": "Push a button, an array of LEDs flash before settling on a random number",
+            "Pomodoro Timer": "A simple countdown timer that buzzes when 25 minutes are up",
+            "LiPo Battery Tester": "Calculate voltage and internal resistance, indicating an LED of health",
+            "IR remote cloner": "Record a TV remote code and replay it at the press of a button",
+            "Logic Probe": "A tool to indicate if a circuit is HIGH, LOW, or pulsing",
+            "PWM Fan Controller": "Monitors ambient temperature and adjusts a 4-wire PC fan's speed with PWM",
+            "Plant Moisture Notifier": "Probes the soil and chirps a piezo buzzer when the plant needs watering",
+            "Environment Logger": "A low-power environment logger with an SD card and a battery",
+            "Morse Code Trainer": "A keyer button and buzzer to practice morse code, with visual dot/dash timing indication",
+            "Metronome": "A knob adjusts BPM, and a buzzer outputs a steady click on the beat",
+            "Linux Board": "An interactive Linux computer running on super low-end chips"
+          };
+
+          const button = document.getElementById('generate-btn');
+          const display = document.getElementById('idea-display');
+
+          const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*?+=~!^";
+
+          button.addEventListener('click', () => {
+              button.disabled = true;
+
+              let iterations = 0;
+              const maxIterations = 15;
+
+              const interval = setInterval(() => {
+                  let noise = "";
+                  for (let i = 0; i < 16; i++) {
+                      noise += chars[Math.floor(Math.random() * chars.length)];
+                  }
+
+                  display.innerHTML = `<span style="opacity: 0.6;">${noise}</span>`;
+                  iterations++;
+
+                  if (iterations >= maxIterations) {
+                      clearInterval(interval);
+
+                      const keys = Object.keys(ideas);
+                      const randomKey = keys[Math.floor(Math.random() * keys.length)];
+                      const randomDesc = ideas[randomKey];
+
+                      display.innerHTML = `
+                          <p><strong class="bold">${randomKey}</strong><br>
+                          <span style="font-size: 0.85rem; opacity: 0.8; margin-left: -2.2rem;">${randomDesc}</span></p>
+                      `;
+
+                      button.disabled = false;
+                  }
+              }, 60);
+          });
+        </script>
+    </body>
+</html>
