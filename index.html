@@ -90,6 +90,11 @@
                 padding: 0.5rem 1rem 1rem 2.2rem;
             }
 
+            details > ul {
+                margin: 0;
+                padding: 0 1rem 1rem 3.4rem;
+            }
+
             details > img {
                 display: block;
                 box-sizing: border-box;
@@ -220,7 +225,26 @@
                             >
                             - it's the list for allowed MCU's. Parts from Mouser
                             are typically priced lower than on DigiKey.
+                            Chips with an exposed ground pad (e.g. QFN/DFN-8)
+                            are fine; the pad doesn't count as a 9th pin.
                         </p>
+                    </details>
+                    <details>
+                        <summary class="bold">
+                            Can I use GPIO expanders or shift registers?
+                        </summary>
+                        <p>
+                            Yes, with limits:
+                        </p>
+                        <ul>
+                            <li>I2C/SPI I/O expanders are allowed, but only one
+                                expander IC total per board.</li>
+                            <li>Shift registers (e.g. 74HC595) are allowed, but
+                                they may add at most 4 extra usable GPIO total
+                                across the whole board. Only 4 outputs may be
+                                used/connected; mark the rest NC.</li>
+                            <li>No cascading or chaining.</li>
+                        </ul>
                     </details>
                     <details>
                         <summary class="bold">
@@ -239,7 +263,7 @@
                         <p>
                             That's okay! This is the perfect excuse to learn.
                             YouTube is your best friend here. Search for "KiCad
-                            9 tutorial for beginners". It will be frustrating at
+                            tutorial for beginners". It will have a learning curve at
                             first, but seeing your own board in real life is
                             worth it.
                         </p>
@@ -265,6 +289,11 @@
                             but instead hardware! There's a chance you may receive
                             different parts than requested (e.g. for passives) if we
                             find multiple projects using similar parts.
+                        </p>
+                        <p>
+                            <b class="bold">Outside the US?</b> We'll give you a
+                            grant card instead, so you can buy cheaper parts and
+                            PCBs from local suppliers.
                         </p>
                     </details>
                     <details>

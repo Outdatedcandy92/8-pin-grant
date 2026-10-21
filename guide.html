@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <title>8-Pin Grant: Example Guide</title>
+        <style>
+            :root {
+                --font-family: monospace;
+                padding-bottom: 1rem;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: var(--font-family);
+                font-weight: 400;
+            }
+            html,
+            body {
+                background-color: Canvas;
+                color: CanvasText;
+                color-scheme: light dark;
+                font-size: 0.9rem;
+            }
+            body {
+                padding: 0 20px;
+            }
+            #root {
+                margin: 0 auto;
+                max-width: 50rem;
+            }
+            p {
+                padding-bottom: 1rem;
+                line-height: 1.3rem;
+            }
+            h1 {
+                padding-bottom: 1rem;
+            }
+            h2 {
+                font-weight: bold;
+                padding: 1.5rem 0 0.75rem 0;
+            }
+            h3 {
+                font-weight: bold;
+                padding: 0.5rem 0 0.5rem 0;
+            }
+            li {
+                margin-left: 1rem;
+                line-height: 1.3rem;
+            }
+            ul,
+            ol {
+                margin-left: 1rem;
+                padding-bottom: 1rem;
+            }
+            .bold {
+                font-weight: bold !important;
+            }
+            table {
+                border-collapse: collapse;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+            th,
+            td {
+                border: 1px solid rgba(128, 128, 128, 0.5);
+                padding: 0.35rem 0.6rem;
+                text-align: left;
+            }
+            th {
+                font-weight: bold;
+                background-color: rgba(128, 128, 128, 0.09);
+            }
+            pre.code {
+                border: 1px solid rgba(128, 128, 128, 0.5);
+                border-radius: 6px;
+                background-color: rgba(128, 128, 128, 0.06);
+                padding: 0.75rem 1rem;
+                margin-bottom: 1rem;
+                overflow-x: auto;
+                line-height: 1.3rem;
+            }
+            code {
+                background-color: rgba(128, 128, 128, 0.12);
+                padding: 0 0.2rem;
+                border-radius: 3px;
+            }
+            pre.code code {
+                background: none;
+                padding: 0;
+            }
+            .note {
+                border-left: 3px solid rgba(128, 128, 128, 0.7);
+                background-color: rgba(128, 128, 128, 0.06);
+                padding: 0.75rem 1rem 0 1rem;
+                margin-bottom: 1rem;
+            }
+            .screenshot {
+                display: block;
+                width: 100%;
+                max-width: 32rem;
+                height: auto;
+                margin-bottom: 1rem;
+                border-radius: 6px;
+            }
+            .placeholder {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                width: 100%;
+                max-width: 32rem;
+                min-height: 10rem;
+                margin-bottom: 1rem;
+                padding: 1rem;
+                border: 1px dashed rgba(128, 128, 128, 0.7);
+                border-radius: 6px;
+                opacity: 0.7;
+            }
+            .toc a {
+                line-height: 1.5rem;
+            }
+            .idea-btn {
+                display: inline-block;
+                text-decoration: none;
+                background: rgba(128, 128, 128, 0.12);
+                border: 1px solid rgba(128, 128, 128, 0.6);
+                padding: 0.6rem 1.2rem;
+                border-radius: 4px;
+                color: currentColor;
+                font-weight: bold;
+                font-size: 1.1rem;
+                transition: background 0.2s;
+            }
+            .idea-btn:hover {
+                background: rgba(128, 128, 128, 0.2);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root">
+            <br /><br />
+            <p><a href="index.html">&larr; Back to 8-Pin Grant</a></p>
+            <h1>Example Guide: ATtiny412 Blinky</h1>
+            <p>
+                This guide walks through every step of the grant using one
+                small example board: an ATtiny412, an LED, and a button,
+                powered by a coin cell. It's meant to show the
+                <i>process</i>. Please don't submit a copy of it. Your project
+                should be your own idea!
+            </p>
+
+            <h2>Contents</h2>
+            <ol class="toc">
+                <li><a href="#chip">Pick a chip</a></li>
+                <li><a href="#repo">Set up your repo and journal</a></li>
+                <li><a href="#schematic">Draw the schematic</a></li>
+                <li><a href="#footprints">Assign footprints</a></li>
+                <li><a href="#layout">Lay out the PCB</a></li>
+                <li><a href="#cost">Check your cost</a></li>
+                <li><a href="#submit">Submit</a></li>
+                <li><a href="#program">Build and program it</a></li>
+                <li><a href="#ship">Ship it</a></li>
+            </ol>
+
+            <h2 id="chip">1. Pick a chip</h2>
+            <p>
+                Browse the 8-pin MCU lists on
+                <a
+                    href="https://www.digikey.com/en/products/filter/embedded/microcontrollers/685?s=N4IgjCBcpgTAnBaIDGUBmBDANgZwKYA0IA9lANogICsALAOwBsIxNADPPS1fNR293YAOLq15tqQwfADM8RNLnxai%2BczG02YUT02xq02o1gCN9agY2IpV2Ot294hzswC6xAA4AXKCADKXgBOAJYAdgDmIAC%2BxGDwQk7IaJBYeESkFCACrjEgALSJoMlBAK7pZJCUEDnEebBQRVCl5ZmWIE45UVFAA"
+                    >DigiKey</a
+                >
+                or
+                <a
+                    href="https://www.mouser.com/c/semiconductors/integrated-circuits-ics/embedded-processors-controllers/microcontrollers-mcu/?package%20%2F%20case=DFN-8%7C~DIP-8%7C~DSBGA-8%7C~MSOP-8%7C~PDIP-8%7C~QFN-8%7C~SO-N-8%7C~SO8N%7C~SO8N-8%7C~SOIC-8%7C~SOIC-Narrow-8%7C~SON-8%7C~SOP-8%7C~SOT-23-8%7C~SOT-23-THIN-8%7C~SOT-8%7C~TSSOP-8%7C~UDFN-8%7C~USON-8%7C~WDFN-8%7C~WSON-8&instock=y&active=y&rohscompliant=y&normallystocked=y"
+                    >Mouser</a
+                >. Open the datasheet of anything that looks interesting and
+                find the <b class="bold">pinout</b> diagram. With only 8 pins,
+                two go to power, so you have about 6 left for everything else.
+            </p>
+            <p>For this example we use the <b class="bold">ATtiny412</b> in SOIC-8:</p>
+            <table>
+                <tr><th>Pin</th><th>Name</th><th>Used for</th></tr>
+                <tr><td>1</td><td>VCC</td><td>Power (1.8V to 5.5V)</td></tr>
+                <tr><td>2</td><td>PA6</td><td>Button</td></tr>
+                <tr><td>3</td><td>PA7</td><td>Free</td></tr>
+                <tr><td>4</td><td>PA1</td><td>Free</td></tr>
+                <tr><td>5</td><td>PA2</td><td>Free</td></tr>
+                <tr><td>6</td><td>PA0 / UPDI</td><td>Programming</td></tr>
+                <tr><td>7</td><td>PA3</td><td>LED</td></tr>
+                <tr><td>8</td><td>GND</td><td>Ground</td></tr>
+            </table>
+            <div class="note">
+                <p>
+                    Before you commit to a chip, find out how it gets
+                    programmed (UPDI, SWD, ISP, etc.). Your board needs a way to
+                    connect a programmer to those pins.
+                </p>
+            </div>
+            <div class="note">
+                <p>
+                    Exposed ground pads (common on QFN/DFN-8 packages) are
+                    fine and don't count as more than 8 pins.
+                </p>
+            </div>
+            <h3>Need more pins?</h3>
+            <ul>
+                <li>I2C/SPI I/O expanders are allowed. Limit one expander IC
+                    total per board.</li>
+                <li>Shift registers (e.g. 74HC595) are allowed, but they may
+                    add at most 4 extra usable GPIO total across the whole
+                    board. Only 4 outputs may be used/connected; mark the rest
+                    NC.</li>
+                <li>No cascading or chaining.</li>
+            </ul>
+
+            <h2 id="repo">2. Set up your repo and journal</h2>
+            <p>
+                Make a GitHub repo before you start designing. You must spend
+                at least 7 hours on your project, and the journal is how we
+                check that. Write an entry every time you work on it: what you
+                did, what broke, and how long it took. Screenshots help a lot.
+            </p>
+            <pre class="code"><code>my-8pin-project/
+├── JOURNAL.md
+├── README.md
+├── hardware/      (KiCad project files)
+├── firmware/      (your code)
+└── bom.csv</code></pre>
+            <p>An example journal entry:</p>
+            <pre class="code"><code>## Oct 20 - 1.5 hours
+- Picked the ATtiny412, read the pinout section of the datasheet
+- Drew the schematic: MCU, decoupling cap, LED, button, UPDI header
+- Ran ERC and fixed an unconnected power flag error
+- Next: assign footprints</code></pre>
+
+            <h2 id="schematic">3. Draw the schematic</h2>
+            <p>
+                Create a new KiCad project inside <code>hardware/</code> and
+                open the schematic editor. Place these parts:
+            </p>
+            <table>
+                <tr><th>Ref</th><th>Part</th><th>Why</th></tr>
+                <tr><td>U1</td><td>ATtiny412</td><td>The brain</td></tr>
+                <tr><td>C1</td><td>100nF capacitor</td><td>Decoupling, as close to VCC as possible</td></tr>
+                <tr><td>D1</td><td>LED</td><td>Something to blink</td></tr>
+                <tr><td>R1</td><td>1k&Omega; resistor</td><td>Limits LED current</td></tr>
+                <tr><td>SW1</td><td>Tactile button</td><td>Input (uses the internal pull-up)</td></tr>
+                <tr><td>J1</td><td>3-pin header</td><td>UPDI programming: VCC, GND, UPDI</td></tr>
+                <tr><td>BT1</td><td>CR2032 holder</td><td>Power</td></tr>
+            </table>
+            <ul>
+                <li>PA3 &rarr; R1 &rarr; D1 &rarr; GND</li>
+                <li>PA6 &rarr; SW1 &rarr; GND</li>
+                <li>PA0 (UPDI) &rarr; J1 pin 3</li>
+                <li>C1 between VCC and GND</li>
+            </ul>
+            <img class="screenshot" src="media/demo-schem.png" alt="Fully routed ATtiny412 demo board"/>
+            <p>
+                Run <b class="bold">Inspect &rarr; Electrical Rules Checker</b>
+                and fix every error before you move on.
+            </p>
+            <h3>Add part numbers now</h3>
+            <p>
+                For every part, open its properties and add a field called
+                <b class="bold">Part Number</b> containing the
+                <i>manufacturer's</i> part number (not the DigiKey/Mouser
+                number). Doing it now saves pain later when you make the BOM.
+            </p>
+            <p>
+                For passives like resistors and capacitors,
+                <a href="https://octopart.com">Octopart</a> is helpful. Search
+                for a value and package (e.g. "100nF 0805") to compare
+                in-stock parts and prices across distributors.
+            </p>
+            <img
+                class="screenshot"
+                src="https://i.ibb.co/XZWBbwdC/Screenshot-From-2026-10-19-16-50-07.png"
+                alt="Part Number field in KiCad symbol properties editor"
+            />
+
+            <h2 id="footprints">4. Assign footprints</h2>
+            <p>
+                Open <b class="bold">Tools &rarr; Assign Footprints</b>. Every
+                symbol needs a physical footprint that matches the exact part
+                you're buying. Check the package dimensions in each datasheet.
+            </p>
+            <ul>
+                <li>U1: <code>SOIC-8_3.9x4.9mm_P1.27mm</code></li>
+                <li>R1, C1, D1: 0805 SMD (easy to hand solder)</li>
+                <li>J1: <code>PinHeader_1x03_P2.54mm_Vertical</code></li>
+            </ul>
+            <div class="note">
+                <p>
+                    Surface mount chips need room for a SOIC-8 clip, or a
+                    programming header like J1. Through-hole chips should have
+                    programming headers too.
+                </p>
+            </div>
+
+            <h2 id="layout">5. Lay out the PCB</h2>
+            <ol>
+                <li>
+                    Set up OSH Park's design rules first. Their directions are
+                    <a href="https://docs.oshpark.com/design-tools/kicad/">here</a>.
+                </li>
+                <li>Press <b class="bold">F8</b> (Update PCB from Schematic) to pull in your parts.</li>
+                <li>Draw a board outline on <code>Edge.Cuts</code>. Smaller boards cost less.</li>
+                <li>Place parts. Put C1 right next to U1's VCC pin.</li>
+                <li>Route traces. Use thicker traces for power.</li>
+                <li>
+                    Make a GND plane: add a copper zone on the GND net on both
+                    layers (2 layers only). Press <b class="bold">B</b> to fill
+                    zones.
+                </li>
+                <li>
+                    Add vias to stitch the top and bottom GND planes together,
+                    especially near ground pins and around the board edge.
+                </li>
+                <li>Add silkscreen: your name, the project name, and some art!</li>
+                <li>Run <b class="bold">Inspect &rarr; Design Rules Checker</b> until it's clean.</li>
+            </ol>
+            <img class="screenshot" src="media/demo-routing.png" alt="PCB routing of demo PCB" />
+            <img class="screenshot" src="media/demo-3d.png" alt="3d render of demo PCB in KiCad" />
+
+            <h2 id="cost">6. Check your cost</h2>
+            <h3>PCBs</h3>
+            <p>
+                Upload your <code>.kicad_pcb</code> file to
+                <a href="https://oshpark.com">OSH Park</a> for a quote. They
+                charge $5 per square inch for 3 boards. For example, a
+                1.5" &times; 1.5" board is 2.25 sq in, which costs about
+                $11.25 for 3.
+            </p>
+            <img class="screenshot" src="media/oshpark.png" class="Uploaded PCB to OSH Park to see price" />
+            <h3>Parts</h3>
+            <p>
+                In the schematic editor, export a BOM that includes your
+                <b class="bold">Part Number</b> field, then upload it to
+                DigiKey or Mouser's BOM tool. Multiply by up to 3 if you want
+                parts for every board.
+            </p>
+            <table>
+                <tr><th>Item</th><th>Approx. cost</th></tr>
+                <tr><td>3 PCBs (OSH Park)</td><td>board area (sq in) &times; $5</td></tr>
+                <tr><td>3&times; parts (MCU, passives, LED, button, holder, header)</td><td>~$10</td></tr>
+                <tr><th>Total</th><th>PCBs + parts, must be under $35</th></tr>
+            </table>
+            <p>
+                Prices are estimates. Check the real numbers for your own
+                design. If you go over $35, you pay the difference.
+            </p>
+            <div class="note">
+                <p>
+                    Outside the US? You'll get a grant card instead, so you
+                    can buy cheaper parts and PCBs from local suppliers.
+                </p>
+            </div>
+
+            <h2 id="submit">7. Submit</h2>
+            <p>Make sure your repo has:</p>
+            <ul>
+                <li>The full KiCad project (schematic, PCB, project file)</li>
+                <li>Your BOM with manufacturer part numbers</li>
+                <li>A journal showing at least 7 hours of work</li>
+                <li>A README with a picture and a short description</li>
+            </ul>
+            <p>
+                Then fill out the submission form. We aim to review within 3-5
+                days.
+            </p>
+
+            <h2 id="program">8. Build and program it</h2>
+            <p>
+                When your boards and parts arrive, solder the smallest parts
+                first (the MCU and passives), then the bigger ones. Check for
+                shorts between VCC and GND with a multimeter before you plug
+                anything in.
+            </p>
+            <p>
+                The ATtiny412 programs over UPDI. We'll send you a programmer.
+                Connect it to J1 (VCC, GND, UPDI). In the Arduino IDE, install
+                the <b class="bold">megaTinyCore</b> board package, select
+                ATtiny412, choose your programmer, and upload:
+            </p>
+            <pre class="code"><code>void setup() {
+  pinMode(PIN_PA3, OUTPUT);
+  pinMode(PIN_PA6, INPUT_PULLUP);
+}
+
+void loop() {
+  int delayMs = digitalRead(PIN_PA6) == LOW ? 100 : 500;
+  digitalWrite(PIN_PA3, HIGH);
+  delay(delayMs);
+  digitalWrite(PIN_PA3, LOW);
+  delay(delayMs);
+}</code></pre>
+            <p>
+                The LED blinks slowly, and fast while the button is held. Put
+                your code in <code>firmware/</code> and commit it.
+            </p>
+
+            <h2 id="ship">9. Ship it</h2>
+            <p>
+                Record a short video of your board working and share it in
+                <a href="https://hackclub.enterprise.slack.com/archives/C0A0ER31ZFD">#8-pin-grant</a>.
+                Add it to your README too. We might send a sticker!
+            </p>
+            <h3>Make yours better than this one</h3>
+            <p>
+                This example only uses 2 of the free pins. Ideas for yours: a
+                buzzer, a light sensor, more LEDs, a fun board shape, a 3D
+                printed case. Stuck? Try the idea generator on the
+                <a href="index.html">main page</a>.
+            </p>
+
+            <div style="padding-top: 10px">
+                <a
+                    href="https://forms.hackclub.com/8-pin-grant"
+                    class="idea-btn"
+                    target="_blank"
+                    rel="noopener"
+                    >Submit Your Project</a
+                >
+            </div>
+
+            <footer style="padding-top: 2rem; padding-bottom: 1rem; font-size: 0.85rem;">
+                <a href="https://hackclub.com/">Hack Club</a> &middot;
+                <a href="https://hackclub.com/privacy-and-terms">Privacy &amp; Terms</a> &middot;
+                <a href="https://forms.hackclub.com/bounty">Report a Bounty</a> &middot;
+                <a href="https://security.hackclub.com/">Security</a>
+            </footer>
+        </div>
+    </body>
+</html>
